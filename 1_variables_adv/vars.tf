@@ -5,13 +5,14 @@
 # variable "AWS_SECRET_KEY" {}
 
 variable "AWS_REGION" {}
-  
+
 variable "AWS_PROFILE" {}
   
 variable "instance_type" {}
 
 variable "Name" {}
-  
+
+
 
 variable "AMIS" {
   type = map(string)
