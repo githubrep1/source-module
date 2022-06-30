@@ -1,17 +1,18 @@
 # You can use this URL here at the bottom, "https://cloud-images.ubuntu.com/locator/ec2/" to look up your "AMI-IDs".
 
 # variable "AWS_ACCESS_KEY" {}
-# variable "AWS_SECRET_KEY" {}
-variable "AWS_REGION" {
-  default = "eu-west-1"
-}
-variable "AWS_PROFILE" {
-  default = "terraform"
-}
 
-variable "instance_type" {
-  default = "t2.micro"
-}
+# variable "AWS_SECRET_KEY" {}
+
+variable "AWS_REGION" {}
+  
+variable "AWS_PROFILE" {}
+  
+variable "instance_type" {}
+
+variable "Name" {}
+  
+
 variable "AMIS" {
   type = map(string)
   default = {
