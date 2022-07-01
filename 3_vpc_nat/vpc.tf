@@ -1,7 +1,6 @@
 # Internet VPC
 resource "aws_vpc" "main" {
-    
-    cidr_block = var.vpc_cidr
+    cidr_block = "10.0.0.0/16"
     instance_tenancy = "default"
     enable_dns_support = "true"
     enable_dns_hostnames = "true"
@@ -13,55 +12,67 @@ resource "aws_vpc" "main" {
 }
 
 
-# Subnets public
+# Subnets
+resource "aws_subnet" "main-public-1" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.1.0/24"
+    map_public_ip_on_launch = "true"
+    availability_zone = "eu-west-1a"
 
-# Create 1 public subnets for each AZ within the regional VPC
-
-resource "aws_subnet" "public" {
-
-  for_each = var.public_subnet_numbers
-  vpc_id            = aws_vpc.main.id
-  availability_zone = each.key
- 
-  # 2,048 IP addresses each
-  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 4, each.value)
-  map_public_ip_on_launch = "true"
-
- 
-  tags = {
-    Name = "public-subnet"
-    # Project     = "cloudcasts.io"
-    # Role        = "public"
-    # Environment = var.infra_env
-    # ManagedBy   = "terraform"
-    Subnet      = "${each.key}-${each.value}"
-  }
+    tags = {
+        Name = "main-public-1"
+    }
 }
+resource "aws_subnet" "main-public-2" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.2.0/24"
+    map_public_ip_on_launch = "true"
+    availability_zone = "eu-west-1b"
 
-
-# subnets private
-
-# Create 1 private subnets for each AZ within the regional VPC
-
-resource "aws_subnet" "private" {
-  for_each = var.private_subnet_numbers
- 
-  vpc_id            = aws_vpc.main.id
-  availability_zone = each.key
- 
-  # 2,048 IP addresses each
-  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 4, each.value)
- 
-  tags = {
-    Name = "private-subnet"
-   # Project     = "cloudcasts.io"
-   # Role        = "private"
-   # Environment = var.infra_env
-   # ManagedBy   = "terraform"
-    Subnet      = "${each.key}-${each.value}"
-  }
+    tags = {
+        Name = "main-public-2"
+    }
 }
+resource "aws_subnet" "main-public-3" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.3.0/24"
+    map_public_ip_on_launch = "true"
+    availability_zone = "eu-west-1c"
 
+    tags = {
+        Name = "main-public-3"
+    }
+}
+resource "aws_subnet" "main-private-1" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.4.0/24"
+    map_public_ip_on_launch = "false"
+    availability_zone = "eu-west-1a"
+
+    tags = {
+        Name = "main-private-1"
+    }
+}
+resource "aws_subnet" "main-private-2" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.5.0/24"
+    map_public_ip_on_launch = "false"
+    availability_zone = "eu-west-1b"
+
+    tags = {
+        Name = "main-private-2"
+    }
+}
+resource "aws_subnet" "main-private-3" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.6.0/24"
+    map_public_ip_on_launch = "false"
+    availability_zone = "eu-west-1c"
+
+    tags = {
+        Name = "main-private-3"
+    }
+}
 
 # Internet GW
 resource "aws_internet_gateway" "main-gw" {
@@ -73,30 +84,28 @@ resource "aws_internet_gateway" "main-gw" {
 }
 
 # route tables
-resource "aws_route_table" "public" {
+resource "aws_route_table" "main-public" {
     vpc_id = "${aws_vpc.main.id}"
-    
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = "${aws_internet_gateway.main-gw.id}"
+    }
+
     tags = {
         Name = "main-public-1"
     }
 }
 
-# Public Route
-resource "aws_route" "public" {
-  route_table_id         = aws_route_table.public.id
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.main-gw.id
-}
-
-
-
 # route associations public
-
-resource "aws_route_table_association" "public" {
-  for_each  = aws_subnet.public
-  subnet_id = aws_subnet.public[each.key].id
- 
-  route_table_id = aws_route_table.public.id
+resource "aws_route_table_association" "main-public-1-a" {
+    subnet_id = "${aws_subnet.main-public-1.id}"
+    route_table_id = "${aws_route_table.main-public.id}"
 }
-
-
+resource "aws_route_table_association" "main-public-2-a" {
+    subnet_id = "${aws_subnet.main-public-2.id}"
+    route_table_id = "${aws_route_table.main-public.id}"
+}
+resource "aws_route_table_association" "main-public-3-a" {
+    subnet_id = "${aws_subnet.main-public-3.id}"
+    route_table_id = "${aws_route_table.main-public.id}"
+}
