@@ -1,4 +1,4 @@
-/*terraform {
+terraform {
   backend "s3" {
     encrypt=true
     bucket = "devopsmonkss-terraform-state-storage"
@@ -8,4 +8,4 @@
     # access_key = "<aws_access_key>"
     # secret_key = "<aws_secret_key>"
   }
-}*/
+}
