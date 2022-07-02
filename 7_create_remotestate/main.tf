@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "tf-state-storage" {
-    bucket = "devopsmonkss-terraform-state-storage"
+    bucket = "devopsmonkssv-terraform-state-storage"
     acl    = "private"
     versioning {
       enabled = true
