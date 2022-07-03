@@ -2,16 +2,10 @@
 
 # variable "AWS_ACCESS_KEY" {}
 # variable "AWS_SECRET_KEY" {}
-variable "AWS_REGION" {
-  /*default = "eu-west-1"*/
-}
-variable "AWS_PROFILE" {
-  /*default = "terraform"*/
-}
+variable "AWS_REGION" {}
+variable "AWS_PROFILE" {}
 
-variable "instance_type" {
-  /*default = "t2.micro"*/
-}
+variable "instance_type" {}
 variable "AMIS" {
   type = map(string)
   default = {
