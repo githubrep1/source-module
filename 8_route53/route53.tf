@@ -10,7 +10,7 @@
 
 
 resource "aws_route53_zone" "devopsmonks" {
-   name = "devopsmonks.com"
+   name = var.route53_name
 }
 resource "aws_route53_record" "server1-record" {
    zone_id = "${aws_route53_zone.devopsmonks.zone_id}"
@@ -21,14 +21,14 @@ resource "aws_route53_record" "server1-record" {
 }
 resource "aws_route53_record" "www-record" {
    zone_id = "${aws_route53_zone.devopsmonks.zone_id}"
-   name = "www.devopsmonks"
+   name = var.route53_record_name
    type = "A"
    ttl = "300"
    records = ["104.236.247.8"]
 }
 resource "aws_route53_record" "mail1-record" {
    zone_id = "${aws_route53_zone.devopsmonks.zone_id}"
-   name = "devopsmonks"
+   name = var.route53_mail_record_name
    type = "MX"
    ttl = "300"
    records = [
