@@ -1,20 +1,20 @@
 variable "AWS_REGION" {
-  default = "eu-west-1"
+ /* default = "eu-west-1"*/
 }
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "~/.ssh/devopsmonks.pub"
+ /* default = "~/.ssh/devopsmonks.pub"*/
 }
 
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "~/.ssh/devopsmonks.pem"
+ */ default = "~/.ssh/devopsmonks.pem"*/
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  /*default = "t2.micro"*/
 }
 
 variable "AWS_PROFILE" {
-  default = "terraform"
+ /* default = "terraform"*/
 }
 
 variable "AMIS" {
