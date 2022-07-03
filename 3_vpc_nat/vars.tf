@@ -10,5 +10,5 @@ variable "PATH_TO_PRIVATE_KEY" {
   /*default = "~/.ssh/devopsmonks.pem"*/
 }
 
-variable "cidr_block" {}
+/*variable "cidr_block" {}*/
 
