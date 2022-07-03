@@ -10,6 +10,8 @@ variable "AWS_PROFILE" {}
 variable "availability_zone" {}
 variable "instance_type" {}
 
+variable "key_name" {}
+
 variable "AMIS" {
   type = map(string)
   default = {
