@@ -13,10 +13,11 @@ default = "server1.devopsmonks"
   
 }
 
-variable "route53_reconrd_name"{}
+variable "route53_reconrd_name"{
+
 
 default = "www.devopsmonks"
-
+}
 variable "route53_mail_record_name" {
 
   default = "devopsmonks"
