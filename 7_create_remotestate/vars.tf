@@ -6,3 +6,6 @@ variable "AWS_PROFILE" {
   default = "terraform"
 }
 
+variable "bucket" {}
+variable "name" {}
+
