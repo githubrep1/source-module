@@ -1,7 +1,4 @@
-variable "AWS_REGION" {
-  default = "eu-west-1"
-}
+variable "AWS_REGION" {}
 
-variable "AWS_PROFILE" {
-  default = "training"
-}
+
+variable "AWS_PROFILE" {}
