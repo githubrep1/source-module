@@ -1,6 +1,6 @@
 resource "aws_instance" "example" {
   ami           = "${lookup(var.AMIS, var.AWS_REGION)}"
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   # the VPC subnet
   subnet_id = "${aws_subnet.main-public-1.id}"
@@ -17,7 +17,7 @@ resource "aws_instance" "example" {
 }
 
 resource "aws_ebs_volume" "ebs-volume-1" {
-    availability_zone = "eu-west-1a"
+    availability_zone = var.availability_zone
     size = 20
     type = "gp2"
     tags = {
