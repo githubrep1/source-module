@@ -23,3 +23,7 @@ variable "AMIS" {
     us-east-1 = "mi-00d4e9ff62bc40e03" # US N.virginia
   }
 }
+
+variable "cidr_block" {
+  default = "10.0.0.0/16"
+}
