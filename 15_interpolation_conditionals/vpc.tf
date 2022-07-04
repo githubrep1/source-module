@@ -2,7 +2,7 @@ module "vpc-prod" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "vpc-prod"
-  cidr = "10.0.0.0/16"
+  cidr = var.cidr
 
   azs             = ["${var.AWS_REGION}a", "${var.AWS_REGION}b", "${var.AWS_REGION}c"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
