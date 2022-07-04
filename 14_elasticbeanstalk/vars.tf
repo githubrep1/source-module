@@ -12,3 +12,8 @@ variable "AWS_PROFILE" {
   default = "terraform"
 }
 variable "RDS_PASSWORD" {}
+
+variable "cidr_block" {
+  
+  default = "10.0.0.0/16"
+}
