@@ -21,3 +21,7 @@ variable "instance_type" {
 variable "AWS_PROFILE" {
   default = "terraform"
 }
+
+variable "cidr" {
+  default = "10.0.0.0/16"
+}
